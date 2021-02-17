@@ -4,9 +4,14 @@ MAINTAINER Martin Høgh<mh@mapcentia.com>
 RUN export DEBIAN_FRONTEND=noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main contrib non-free#g" /etc/apt/sources.list &&\
-    sed -i "s#deb http://security.debian.org/debian-security buster/updates main#deb http://security.debian.org/debian-security buster/updates main contrib non-free#g" /etc/apt/sources.list &&\
-    sed -i "s#deb http://deb.debian.org/debian buster-updates main#deb http://deb.debian.org/debian buster-updates main contrib non-free#g" /etc/apt/sources.list
+# RUN sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main contrib non-free#g" /etc/apt/sources.list &&\
+#    sed -i "s#deb http://security.debian.org/debian-security buster/updates main#deb http://security.debian.org/debian-security buster/updates main contrib non-free#g" /etc/apt/sources.list &&\
+#    sed -i "s#deb http://deb.debian.org/debian buster-updates main#deb http://deb.debian.org/debian buster-updates main contrib non-free#g" /etc/apt/sources.list
+
+# 用清华镜像 http://mirrors.tuna.tsinghua.edu.cn
+RUN sed -i "s#deb http://deb.debian.org/debian buster main#deb http://mirrors.tuna.tsinghua.edu.cn/debian buster main contrib non-free#g" /etc/apt/sources.list &&\
+    sed -i "s#deb http://security.debian.org/debian-security buster/updates main#deb http://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free#g" /etc/apt/sources.list &&\
+    sed -i "s#deb http://deb.debian.org/debian buster-updates main#deb http://mirrors.tuna.tsinghua.edu.cn/debian buster-updates main contrib non-free#g" /etc/apt/sources.list
 
 # Install packages
 RUN apt-get -y update  --fix-missing
@@ -18,8 +23,13 @@ RUN apt-get -y install cron vim wget g++ build-essential git unzip rng-tools apa
     libprotobuf-c-dev libprotobuf-dev libprotobuf-c1 libprotobuf17 protobuf-compiler protobuf-c-compiler libtool
 
 # Install Java 8 for MSACCESSS support in GDAL
+#RUN wget -O - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - &&\
+#    add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ &&\
+#    apt-get -y update &&\
+#    apt-get -y install adoptopenjdk-8-hotspot adoptopenjdk-8-hotspot-jre
+# 用镜像https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/deb/
 RUN wget -O - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add - &&\
-    add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ &&\
+    add-apt-repository -y https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/deb/ &&\
     apt-get -y update &&\
     apt-get -y install adoptopenjdk-8-hotspot adoptopenjdk-8-hotspot-jre
 
