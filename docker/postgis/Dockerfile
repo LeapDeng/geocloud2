@@ -26,9 +26,14 @@ RUN wget https://packages.microsoft.com/debian/10/prod/pool/main/m/msodbcsql17/m
 #    install
 
 # Clone GC2 from GitHub
+# 使用Fork后的Github地址 https://github.com/LeapDeng/geocloud2.git
+#RUN mkdir /var/www &&\
+#	cd /var/www/ &&\
+#	git clone https://github.com/mapcentia/geocloud2.git
+
 RUN mkdir /var/www &&\
 	cd /var/www/ &&\
-	git clone https://github.com/mapcentia/geocloud2.git
+	git clone https://github.com/LeapDeng/geocloud2.git
 
 # Add config files from Docker repo
 COPY conf/postgresql/pg_hba.conf /etc/postgresql/11/main/
