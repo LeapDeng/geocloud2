@@ -18,7 +18,7 @@ RUN	cd /var/www/geocloud2 &&\
 	grunt production
 
 # Install dashboard
-# 使用Fork后的Github地址 https://github.com/LeapDeng/geocloud2.git
+# 使用Fork后的Github地址 https://github.com/LeapDeng/dashboard.git
 #RUN	mkdir -p /var/www/geocloud2/public/dashboard && mkdir /dashboardtmp && cd /dashboardtmp &&\
 #    git clone https://github.com/mapcentia/dashboard.git && cd /dashboardtmp/dashboard &&\
 #    npm install && cp ./app/config.js.sample ./app/config.js && cp ./.env.production ./.env &&\
@@ -26,7 +26,7 @@ RUN	cd /var/www/geocloud2 &&\
 #    rm -R /dashboardtmp
 
 RUN	mkdir -p /var/www/geocloud2/public/dashboard && mkdir /dashboardtmp && cd /dashboardtmp &&\
-    git clone https://github.com/LeapDeng/geocloud2.git && cd /dashboardtmp/dashboard &&\
+    git clone https://github.com/LeapDeng/dashboard.git && cd /dashboardtmp/dashboard &&\
     npm install && cp ./app/config.js.sample ./app/config.js && cp ./.env.production ./.env &&\
     npm run build && cp -R ./build/* /var/www/geocloud2/public/dashboard/ &&\
     rm -R /dashboardtmp
